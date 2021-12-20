@@ -33,7 +33,7 @@ const ProductCard = ({ product, currentUser }) => {
 
   return (
     <Card className={classes.productCard}>
-      <NavLink to={`product/${product._id}`}>
+      <NavLink to={`/product/${product._id}`}>
         <CardHeader
           action={
             <IconButton aria-label="settings">

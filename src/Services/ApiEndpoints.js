@@ -2,7 +2,8 @@ import http from "./httpService";
 require("dotenv").config();
 // DATA
 
-const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
+const BASE_URL =
+  process?.env.NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 export function getJewels() {
   return http.get(`${BASE_URL}/jewels/`).then((res) => {

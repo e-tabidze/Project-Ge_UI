@@ -18,7 +18,7 @@ const UserPage = () => {
   const [productModalActive, setProductModalActive] = useState(false);
   // const [editUser, setEditUser] = useState(null);
   const { currentUser, currentUserRef } = useCurrentUser();
-  const { userJewels } = useUserJewels(currentUserRef);
+  const { userJewels, handleGetUserJewels } = useUserJewels(currentUserRef);
 
   const productModalToggle = () => {
     setProductModalActive(!productModalActive);
@@ -57,7 +57,12 @@ const UserPage = () => {
                 მომხმარებლის მონაცემები
                 <ModeEditOutlineOutlinedIcon fontSize="small" />
               </div>
-              {editUser && <EditUserForm toggleEditUser={toggleEditUser} currentUser={currentUser} />}
+              {editUser && (
+                <EditUserForm
+                  toggleEditUser={toggleEditUser}
+                  currentUser={currentUser}
+                />
+              )}
             </div> */}
             <div
               className={classes.userpage_content_wrapper_cta}
@@ -84,6 +89,7 @@ const UserPage = () => {
           product={null}
           productModalActive={productModalActive}
           productModalToggle={productModalToggle}
+          handleGetUserJewels={handleGetUserJewels}
         />
       )}
     </>

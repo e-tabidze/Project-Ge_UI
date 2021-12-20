@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { editJewel, postJewels } from "../../Services/ApiEndpoints";
 import useCurrentUser from "../../Helpers/useCurrentUser";
-import useUserJewels from "../../Helpers/useUserJewels";
 import useMetals from "../../Helpers/useMetals";
 import usePieces from "../../Helpers/usePieces";
 import useStones from "../../Helpers/useStones";
@@ -27,12 +26,12 @@ const ProductModal = ({
   product,
   productModalActive,
   productModalToggle,
+  handleGetUserJewels,
 }) => {
   const { existingJWT } = useCurrentUser();
   const { metals } = useMetals();
   const { pieces } = usePieces();
   const { stones } = useStones();
-  const { setUserJewels } = useUserJewels();
   const [productObject, setProductObject] = useState({
     name: product?.name || "",
     piece: product?.piece._id || "",
@@ -75,7 +74,6 @@ const ProductModal = ({
 
   useEffect(() => {
     const subscription = watch((value) => {
-      console.log(value);
       return value;
     });
 
@@ -102,9 +100,10 @@ const ProductModal = ({
       console.log(productObject, "productObject");
       switch (modalType) {
         case "add":
-          postJewels(jewelFormData, existingJWT);
-          setUserJewels();
-          productModalToggle();
+          postJewels(jewelFormData, existingJWT).then(() => {
+            handleGetUserJewels();
+            productModalToggle();
+          });
           break;
         case "edit":
           editJewel(jewelFormData, product._id, existingJWT);
@@ -261,7 +260,6 @@ const ProductModal = ({
           {...register("price", { required: true, maxLength: 50 })}
           required
           fullWidth
-          autoFocus
           label="ფასი"
           name="price"
           error={errors.name ? true : false}

@@ -10,7 +10,6 @@ const useSimilarJewels = (jewel) => {
   };
 
   useEffect(() => {
-    console.log(jewel);
     if (jewel) {
       handleGetSimilarJewels();
     }

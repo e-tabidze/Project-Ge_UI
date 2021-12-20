@@ -15,7 +15,7 @@ const useUserJewels = (currentUserRef) => {
       setUserJewels(null);
     };
   }, []);
-  return { userJewels, setUserJewels };
+  return { userJewels, setUserJewels, handleGetUserJewels };
 };
 
 export default useUserJewels;

@@ -28,6 +28,7 @@ const ForgotPasswordForm = ({ toggleAccountModal, forgotPasswordForm }) => {
   const onSubmit = async (e) => {
     try {
       await forgotPassword(e.email);
+
       setAlert("success");
     } catch (ex) {
       if (ex.response?.status === 400) {
@@ -35,6 +36,7 @@ const ForgotPasswordForm = ({ toggleAccountModal, forgotPasswordForm }) => {
       }
     }
   };
+
   return (
     <>
       {alert === "error" ? (
