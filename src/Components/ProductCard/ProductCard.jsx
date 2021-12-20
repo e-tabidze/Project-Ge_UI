@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ImageSlider from "../../ReusableComponents/ImageSlider/ImageSlider";
 import FavoriteButton from "../../ReusableComponents/FavoriteButton/FavoriteButton";
@@ -11,17 +11,26 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
+import Badge from "@mui/material/Badge";
+import Stack from "@mui/material/Stack";
 import ShareIcon from "@mui/icons-material/Share";
 
 import classes from "./styles.module.scss";
 import userClasses from "../../ReusableComponents/ImageSlider/styles.module.scss";
 
-const ProductCard = ({
-  product,
-  currentUser,
-  userFavorites,
-  setUserFavorites,
-}) => {
+const ProductCard = ({ product, currentUser }) => {
+  const [popover, setPopover] = useState(false);
+
+  const shareProduct = () => {
+    let path = `http://localhost:3001/product/${product._id}`;
+    navigator.clipboard.writeText(path);
+    setPopover(!popover);
+  };
+
+  setTimeout(() => {
+    setPopover(false);
+  }, 3000);
+
   return (
     <Card className={classes.productCard}>
       <NavLink to={`product/${product._id}`}>
@@ -52,13 +61,20 @@ const ProductCard = ({
               style={{ color: "#001e42" }}
               currentUser={currentUser}
               productId={product._id}
-              userFavorites={userFavorites}
-              setUserFavorites={setUserFavorites}
             />
           </IconButton>
         )}
-        <IconButton aria-label="share">
-          <ShareIcon />
+
+        <IconButton aria-label="share" onClick={shareProduct}>
+          <Stack spacing={12} direction="row">
+            {popover ? (
+              <Badge badgeContent={"დაკოპირებულია"} color="secondary">
+                <ShareIcon color="action" />
+              </Badge>
+            ) : (
+              <ShareIcon color="action" />
+            )}
+          </Stack>
         </IconButton>
       </CardActions>
     </Card>

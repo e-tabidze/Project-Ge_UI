@@ -5,6 +5,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import UserPage from "./Pages/UserPage/UserPage";
 import ProductPage from "./Pages/ProductPage/ProductPage";
 import ResetPasswordPage from "./Pages/ResetPasswordPage/ResetPasswordPage";
+import FavProductsPage from "./Pages/FavProductsPage/FavProductsPage";
 import Terms from "./Pages/Terms/Terms";
 import Footer from "./Components/Footer/Footer";
 
@@ -34,6 +35,11 @@ function App() {
           exact
           path="/user-page"
           render={() => (currentUser ? <UserPage /> : <Redirect to="/" />)}
+        />
+        <Route
+          exact
+          path="/user-hearted-products"
+          render={() => (currentUser ? <FavProductsPage /> : <Redirect to="/" />)}
         />
         <Route exact path="/product/:id" component={() => <ProductPage />} />
         <Route

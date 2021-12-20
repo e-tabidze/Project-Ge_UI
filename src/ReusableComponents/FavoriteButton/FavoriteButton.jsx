@@ -3,15 +3,15 @@ import {
   addUserFavProduct,
   removeUserFavProduct,
 } from "../../Services/ApiEndpoints";
+import useUserFavoriteProducts from "../../Helpers/useUserFavoriteProducts";
+import useCurrentUser from "../../Helpers/useCurrentUser";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
-const FavoriteButton = ({
-  currentUser,
-  productId,
-  userFavorites,
-  setUserFavorites,
-}) => {
+const FavoriteButton = ({ currentUser, productId }) => {
+  const { currentUserRef } = useCurrentUser();
+  const { userFavorites, setUserFavorites } =
+    useUserFavoriteProducts(currentUserRef);
   const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
 
   useEffect(() => {

@@ -38,6 +38,9 @@ const Navbar = ({ currentUser, setCurrentUser, getCurrentUser }) => {
     history.push("/user-page");
   };
 
+  const redirectToUserFavProductPage = () => {
+    history.push("/user-hearted-products");
+  };
   return (
     <header className={classes.navbar}>
       <NavLink to="/">
@@ -60,6 +63,7 @@ const Navbar = ({ currentUser, setCurrentUser, getCurrentUser }) => {
           <FavoriteIcon
             fontSize={"medium"}
             style={{ color: "#ffffff", cursor: "pointer" }}
+            onClick={redirectToUserFavProductPage}
           />
         )}
       </div>

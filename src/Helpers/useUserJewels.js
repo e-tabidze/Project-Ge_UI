@@ -5,7 +5,7 @@ const useUserJewels = (currentUserRef) => {
   const [userJewels, setUserJewels] = useState(null);
 
   const handleGetUserJewels = async () => {
-    let data = await getUserJewels(currentUserRef.current._id);
+    let data = await getUserJewels(currentUserRef?.current._id);
     setUserJewels(data.data);
   };
 

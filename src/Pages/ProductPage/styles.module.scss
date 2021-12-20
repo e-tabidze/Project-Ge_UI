@@ -1,10 +1,8 @@
 .productpage {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  &_sideAds {
-    margin: 48px 8px 0px 0px;
-  }
-  &_products_ad {
+  width: 90%;
+  margin: 0 auto;
+
+  &_topAd {
     width: 100%;
     margin-top: 36px;
     > img {
@@ -67,15 +65,29 @@
           border-bottom: 1px solid #001e42;
           padding-bottom: 4px;
         }
+        &_addToFavorites {
+          justify-content: flex-end;
+        }
       }
     }
-    &_similarjewels {
-      margin-top: 48px;
-      &_products {
-        display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
-        grid-gap: 10px;
-      }
+  }
+  &_midAds {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    &_ad {
+      width: 24%;
+      height: 430px;
+      object-fit: cover;
+    }
+  }
+  &_similarjewels {
+    margin-top: 48px;
+    &_products {
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-gap: 10px;
     }
   }
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import useJewels from "../../Helpers/useJewels";
-import { getUserFavorites } from "../../Services/ApiEndpoints";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Searchbar from "../../ReusableComponents/Searchbar/Searchbar";
@@ -20,11 +19,9 @@ const HomePage = ({ currentUser }) => {
   const { jewels } = useJewels();
   const [filters, setFilters] = useState(true);
   const [filteredJewels, setFilteredJewels] = useState([]);
-  const [userFavorites, setUserFavorites] = useState(null);
 
   useEffect(() => {
     jewels && setFilteredJewels(jewels);
-    handleGetUserFavorites();
   }, [jewels]);
 
   const sliderData = [
@@ -44,12 +41,6 @@ const HomePage = ({ currentUser }) => {
       return item.name.toLowerCase().includes(e.toLowerCase());
     });
     setFilteredJewels(filtered);
-  };
-
-  const handleGetUserFavorites = async () => {
-    const data = await getUserFavorites(currentUser?._id);
-    console.log(data.favorite_products, "DATA", currentUser._id);
-    setUserFavorites(data.favorite_products);
   };
 
   return (
@@ -78,17 +69,13 @@ const HomePage = ({ currentUser }) => {
           />
         </div>
         <div className={classes.homepage_content_products}>
-          {filteredJewels?.map((jewel) => {
-            return (
-              <ProductCard
-                product={jewel}
-                currentUser={currentUser}
-                userFavorites={userFavorites}
-                setUserFavorites={setUserFavorites}
-                key={jewel._id}
-              />
-            );
-          })}
+          {filteredJewels?.map((jewel) => (
+            <ProductCard
+              product={jewel}
+              currentUser={currentUser}
+              key={jewel._id}
+            />
+          ))}
           <img
             src={side}
             alt="ოქროს მარკეტი საქართველოში"

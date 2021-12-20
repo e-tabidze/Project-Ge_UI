@@ -1,0 +1,19 @@
+.favproductpage {
+  width: 80%;
+  margin: 0 auto;
+  h1 {
+    color: #001e42;
+    font-weight: 500;
+    margin: 50px 0px;
+  }
+  &_products {
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    @media only screen and (max-width: 1024px) {
+      grid-template-columns: 50% 50%;
+    }
+    @media only screen and (max-width: 425px) {
+      grid-template-columns: 100%;
+    }
+  }
+}
