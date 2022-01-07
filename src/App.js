@@ -34,12 +34,24 @@ function App() {
         <Route
           exact
           path="/user-page"
-          render={() => (currentUser ? <UserPage /> : <Redirect to="/" />)}
+          render={() =>
+            currentUser ? (
+              <UserPage
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser}
+                getCurrentUser={getCurrentUser}
+              />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route
           exact
           path="/user-hearted-products"
-          render={() => (currentUser ? <FavProductsPage /> : <Redirect to="/" />)}
+          render={() =>
+            currentUser ? <FavProductsPage /> : <Redirect to="/" />
+          }
         />
         <Route exact path="/product/:id" component={() => <ProductPage />} />
         <Route

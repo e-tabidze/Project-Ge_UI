@@ -1,9 +1,12 @@
 import http from "./httpService";
+
 require("dotenv").config();
 // DATA
 
 const BASE_URL =
-  process?.env.NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
+  process?.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api"
+    : "/api";
 
 export function getJewels() {
   return http.get(`${BASE_URL}/jewels/`).then((res) => {
@@ -49,7 +52,6 @@ export function postJewels(newJewel, userToken) {
   return http
     .post(`${BASE_URL}/jewels/add`, newJewel, {
       headers: {
-        "x-auth-token": userToken,
         action: "/multiple-upload",
         enctype: "multipart/form-data",
         "Content-type": "application/json",
@@ -62,7 +64,7 @@ export function postJewels(newJewel, userToken) {
 
 export async function editJewel(updatedJewel, jewelId, userToken) {
   return await http
-    .post(`${BASE_URL}/jewels/update/${jewelId}`, updatedJewel, {
+    .patch(`${BASE_URL}/jewels/updateproduct/${jewelId}`, updatedJewel, {
       headers: {
         "x-auth-token": userToken,
         action: "/multiple-upload",
@@ -105,10 +107,22 @@ export function forgotPassword(email) {
   });
 }
 
-export function changePassword(userId, userToken, password) {
+export function changePassword(currentPassword, newPassword) {
   return http
-    .post(`${BASE_URL}/password-reset/${userId}/${userToken}`, {
-      password,
+    .post(`${BASE_URL}/password-reset/change`, {
+      currentPassword,
+      newPassword
+    })
+    .then((res) => {
+      return res;
+    });
+}
+
+export function changeUserInfo(userId, name, email) {
+  return http
+    .patch(`${BASE_URL}/users/editusername/${userId}`, {
+      name,
+      email,
     })
     .then((res) => {
       return res;

@@ -106,7 +106,10 @@ const ProductModal = ({
           });
           break;
         case "edit":
-          editJewel(jewelFormData, product._id, existingJWT);
+          editJewel(jewelFormData, product._id, existingJWT).then(() => {
+            handleGetUserJewels();
+            productModalToggle();
+          });
           break;
       }
     } catch (ex) {}
