@@ -6,7 +6,7 @@ axios.interceptors.request.use(function (config) {
   const access_token = localStorage.getItem("token");
 
   config.headers.token = access_token;
-
+  config.headers.withCredentials = true;
   return config;
 })
 
